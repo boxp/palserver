@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: palserver-loadbalancer
+  namespace: palserver
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8211
+      targetPort: 8211
+      protocol: UDP
+  selector:
+    app: palserver

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: palserver
+  namespace: palserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: palserver
+  template:
+    metadata:
+      labels:
+        app: palserver
+    spec:
+      securityContext:
+        fsGroup: 1000
+      containers:
+      - name: palserver
+        image: asia-northeast1-docker.pkg.dev/boxp-tk/palserver/palserver:2024-02-07-001
+        ports:
+        - containerPort: 8211
+        volumeMounts:
+        - name: saved-volume
+          mountPath: /home/nonroot/PalServer/Pal/Saved
+        resources:
+          requests:
+            cpu: 3500m
+            memory: 24Gi
+      volumes:
+      - name: saved-volume
+        persistentVolumeClaim:
+          claimName: palserver-saved
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: cloud.google.com/gke-nodepool
+                operator: In
+                values:
+                - goliat-dolls
