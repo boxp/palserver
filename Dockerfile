@@ -1,3 +1,4 @@
+# fork from https://zenn.dev/hikarin/articles/dc3f820c020190
 FROM steamcmd/steamcmd:debian-12 AS build
 
 RUN steamcmd +login anonymous +app_update 2394010 validate +quit
