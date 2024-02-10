@@ -1,0 +1,12 @@
+# fork from https://zenn.dev/hikarin/articles/dc3f820c020190
+version: '3.9'
+
+services:
+  palserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8211:8211/udp
+    volumes:
+      - ./Saved:/home/nonroot/PalServer/Pal/Saved
