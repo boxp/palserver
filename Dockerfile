@@ -12,5 +12,5 @@ COPY --from=build /root/.steam/sdk32/steamclient.so .steam/sdk32/
 EXPOSE 8211/udp
 VOLUME /home/nonroot/PalServer/Pal/Saved
 
-ENTRYPOINT ["./PalServer/Pal/Binaries/Linux/PalServer-Linux-Test", "Pal"]
+ENTRYPOINT ["./PalServer/PalServer.sh"]
 CMD ["-useperfthreads", "-NoAsyncLoadingThread", "-UseMultithreadForDS"]
