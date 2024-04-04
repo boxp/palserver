@@ -3,8 +3,6 @@ FROM steamcmd/steamcmd:debian-12 AS build
 
 RUN steamcmd +login anonymous +app_update 2394010 validate +quit
 
-# ENTRYPOINT ["ls", "/root/.local/share/Steam/steamapps/common/PalServer/Pal/Binaries/Linux"]
-
 FROM gcr.io/distroless/cc-debian12:nonroot AS base
 
 COPY --from=build --chown=nonroot /root/.local/share/Steam/steamapps/common/PalServer/ PalServer/
